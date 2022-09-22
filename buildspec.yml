@@ -2,12 +2,6 @@
 version: 0.2
 
 phases:
-#   install:
-#     docker
-      
-#   pre_build:
-#     commands:
-#       - echo Nothing to do in the pre_build phase...
   build:
     commands:
       - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
@@ -16,9 +10,3 @@ phases:
       - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 590852515231.dkr.ecr.us-west-2.amazonaws.com
       - docker tag custom-node/mysql 590852515231.dkr.ecr.us-west-2.amazonaws.com/my-jenkins-repo:latest
       - docker push 590852515231.dkr.ecr.us-west-2.amazonaws.com/my-jenkins-repo:latest
-  post_build:
-    commands:
-      - echo Build completed on `date`
-# artifacts:
-#   files:
-#     - target/messageUtil-1.0.jar
