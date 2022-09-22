@@ -10,6 +10,7 @@ phases:
 #       - echo Nothing to do in the pre_build phase...
   build:
     commands:
+      - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
       - docker build -t custom-node/mysql .
       - docker-compose up -d
       - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 590852515231.dkr.ecr.us-west-2.amazonaws.com
